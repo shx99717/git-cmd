@@ -29,7 +29,7 @@ git commit -m 'some message'
 git push
 git pull
 git log
-git log --pretty=oneline
+git log --oneline
 git diff <branch1> <branch2> e.g. git diff master feature_x
 git show <branch/tag>			 e.g. git show master, git show 1.0.0.1
 git switch <branch_name>
@@ -58,13 +58,37 @@ git checkout -b 1.0.x.x	1.0.0.1					# tag can not be switched/checkout
 git tag <tag_name> <reference of commit>        # create a tag from some past commit
 												# e.g. git tag v1.2 5fcdb03
 												
+# MISC syntax
+HEAD~3      # suffix ~<n> to a revision parameter means the commit object that is the nth generation ancestor of the
+            # named commit object.												
+master~1    # etc
+
 												
-												
-# reverting changes
+# reverting changes, these three commands have entirely different purposes.
+# - git revert
+#	This command creates a new commit that undoes the changes from a previous commit. This command adds new history to the project (it doesn't modify existing history).
+#   If a commit has been made somewhere in the project's history, and you later decide that the commit is wrong and should not have been done, then git revert is the tool for the job. It will undo the changes introduced by the bad commit, recording the "undo" in the history.
+# - git checkout
+#   This command checks-out content from the repository and puts it in your work tree. It can also have other effects, depending on how the command was invoked. For instance, it can also change which branch you are currently working on. This command doesn't make any changes to the history.
+#   If you have modified a file in your working tree, but haven't committed the change, then you can use git checkout to checkout a fresh-from-repository copy of the file.
+#   !!!WARNING!!! Git 2.23 (Q3 2019) will replace git checkout with two new commands becauase the git checkout serves too many purposes
+#   > git switch 
+#     used for branch switching
+#   > git restore
+#     used for restoring file
+#   but git checkout will be still there for backward compatible
+# - git reset
+#   This command is a little more complicated. It actually does a couple of different things depending on how it is invoked. It modifies the index (the so-called "staging area"). Or it changes which commit a branch head is currently pointing at. This command may alter existing history (by changing the commit that a branch references).
+#   If you have made a commit, but haven't shared it with anyone else and you decide you don't want it, then you can use git reset to rewrite the history so that it looks as though you never made that commit.
 git checkout <file_name>						# discard the changes of the file in the working area
 git checkout .									# discard all the changes of the files in the working area
-git reset HEAD <file_name>						# unstage the file
-
+git restore <file_name>							# (better) to discard changes in working area
+git restore --staged <file_name>				# to unstage the file
+git reset HEAD~3								# to remove recent 3 commits, also the history is modified
+git revert 0cb12da   							# use revert if the changes has also been made on remote, otherwise the
+												# usage of git reset will introduce a conflict
+												# revert will introudce a new commit which reverting the changes
+												# which is also much safer
 												
 												
 												
