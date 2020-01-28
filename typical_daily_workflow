@@ -1,0 +1,10 @@
+1. get a feature request
+2. make a branch for it
+3. coding your feature
+4. commit the code
+5. merge master back into the feature branch (because at the time you develop your feature, there could be other things happening in master)
+6. push the feature branch onto github/bitbucket
+7. ask for a pull request that You want to merge n commits into master branch from feature branch, a code review needed there
+8. the guy who review the pull request confirm the merge, and code being merged into the remote master
+9. (optionally) you can delete your branch
+10. now git pull your master, the change from feature branch has been there in master
