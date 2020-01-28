@@ -1,0 +1,57 @@
+# create a new repository and connect to github
+echo "# dummy" >> README.md  
+git init  
+git add README.md  
+git commit -m "first commit"  
+git remote add origin https://github.com/shx99717/dummy.git  
+git push -u origin master  
+
+# add ignore file lists
+# cotent of the file
+# - Literal file names, e.g. dummy_file, .some_file  
+# - Directories e.g. log/
+# - Wildcard e.g. *.log
+# - Negation e.g. all except example.log are ignored 
+#	*.log
+#	!example.log
+# - Double Asterisk to match any number of directories
+#	**/logs matches all files or directories named logs
+#   **/logs/*.log matches all files ending with .log in a logs directory
+# - Comment start with #
+touch .gitignore  
+
+
+# commonly used ones
+git status
+git add
+git rm
+git commit -m 'some message'
+git push
+git pull
+git log
+git log --pretty=oneline
+git diff <branch1> <branch2> e.g. git diff master feature_x
+git show <branch/tag>			 e.g. git show master, git show 1.0.0.1
+git switch <branch_name>
+
+# branches related
+git branch  						# show all branches
+git branch <branch_name> 			# create a branch using current code base
+git switch <branch_name>			# switch a branch
+git push origin feature_x			# push the branch onto the remote
+
+# merge related
+git merge <branch_name>				# merge the code from <branch_name> into current branch
+
+
+
+# tag related
+git tag                             			# show all tags
+git tag 1.0.0.1									# mark the current status into a tag 1.0.0.1
+git tag codebase_at_some_time_point 			# tags can be any name
+git tag -a 1.0.0.2 -m 'release for 1.0.0,2'		# annotated tagging
+git push origin 1.0.0.1 1.0.0.2					# push the tags to remote
+git checkout -b 1.0.x.x	1.0.0.1					# tag can not be switched/checkout
+												# we can create a branch from an existing tag
+												# e.g. 1.0.x.x patch branch for 1.0.0.1 released version
+												
