@@ -60,3 +60,11 @@ git tag <tag_name> <reference of commit>        # create a tag from some past co
 												
 												
 												
+# reverting changes
+git checkout <file_name>						# discard the changes of the file in the working area
+git checkout .									# discard all the changes of the files in the working area
+git reset HEAD <file_name>						# unstage the file
+
+												
+												
+												
