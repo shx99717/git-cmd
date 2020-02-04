@@ -30,15 +30,22 @@ git push
 git pull
 git log
 git log --oneline
+git fetch							# Using git fetch without any parameters like this will retrieve all branches from the remote repo,
+git fetch <remote-repo>				# if you have multiple remote repos then you should specify which one to retrieve from
 git diff <branch1> <branch2> e.g. git diff master feature_x
 git show <branch/tag>			 e.g. git show master, git show 1.0.0.1
 git switch <branch_name>
 
 # branches related
-git branch  						# show all branches
+git branch  						# show local branches
+git branch -a						# show all branches, including remote
 git branch <branch_name> 			# create a branch using current code base
 git switch <branch_name>			# switch a branch
 git push origin feature_x			# push the branch onto the remote
+// to checkout a remote branch
+git fetch							# first fetch all branches from default 'origin'
+git checkout -t origin/dummy-branch	# git checkout -t <remote-repo>/<remote-branch>, the local branch will use the same name as remote branch
+git checkout -t -b db origin/dummy-branch  # git checkout -t -b <local-branch> <remote-repo>/<remote-branch>, the local branch will use a different name
 
 # merge related
 git merge <branch_name>				# merge the code from <branch_name> into current branch
