@@ -71,6 +71,7 @@ git merge <branch_name>				# merge the code from <branch_name> into current bran
 
 # tag related
 git tag                             			# show all tags
+git fetch --tags								# fetch all remote tags
 git tag 1.0.0.1									# mark the current status into a tag 1.0.0.1
 git tag codebase_at_some_time_point 			# tags can be any name
 git tag -a 1.0.0.2 -m 'release for 1.0.0,2'		# annotated tagging
