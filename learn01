@@ -36,6 +36,7 @@ git diff <branch1> <branch2> e.g. git diff master feature_x
 git show <branch/tag>			 e.g. git show master, git show 1.0.0.1
 git switch <branch_name>
 git remote show origin				# show all remote information for origin
+git config --list					# shows all inherited values from: system, global and local
 
 # branches related
 git branch  						# show local branches
@@ -48,10 +49,14 @@ git branch -u <remote-repo>/<branch_name>   # later let a local branch to track 
 git fetch							# first fetch all branches from default 'origin'
 git checkout -t origin/dummy-branch	# git checkout -t <remote-repo>/<remote-branch>, the local branch will use the same name as remote branch
 git checkout -t -b db origin/dummy-branch  # git checkout -t -b <local-branch> <remote-repo>/<remote-branch>, the local branch will use a different name
+
 // delete branch locally
 git branch -d localBranchName
 // delete branch remotely
 git push origin --delete remoteBranchName
+or
+git push origin :remoteBranchName
+
 // if a remote branch does not appear in git branch -r
 1. git config -e
 2. add fetch = +refs/heads/*:refs/remotes/origin/*
