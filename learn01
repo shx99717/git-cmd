@@ -1,4 +1,6 @@
+###############################################################
 # create a new repository and connect to github
+###############################################################
 echo "# dummy" >> README.md  
 git init  
 git add README.md  
@@ -20,8 +22,9 @@ git push -u origin master
 # - Comment start with #
 touch .gitignore  
 
-
+###############################################################
 # commonly used ones
+###############################################################
 git status
 git add
 git rm
@@ -38,7 +41,9 @@ git switch <branch_name>
 git remote show origin				# show all remote information for origin
 git config --list					# shows all inherited values from: system, global and local
 
+###############################################################
 # branches related
+###############################################################
 git branch  						# show local branches
 git branch -a						# show all branches, including remote
 git branch <branch_name> 			# create a branch using current code base
@@ -73,8 +78,9 @@ git branch -d <branch_name>           # or -D to force delete
 git merge <branch_name>				# merge the code from <branch_name> into current branch
 
 
-
+###############################################################
 # tag related
+###############################################################
 git tag                             			# show all tags
 git fetch --tags								# fetch all remote tags
 git tag 1.0.0.1									# mark the current status into a tag 1.0.0.1
@@ -87,13 +93,17 @@ git checkout -b 1.0.x.x	1.0.0.1					# tag can not be switched/checkout
 												# e.g. 1.0.x.x patch branch for 1.0.0.1 released version
 git tag <tag_name> <reference of commit>        # create a tag from some past commit
 												# e.g. git tag v1.2 5fcdb03
-												
+
+###############################################################												
 # MISC syntax
+###############################################################
 HEAD~3      # suffix ~<n> to a revision parameter means the commit object that is the nth generation ancestor of the
             # named commit object.												
 master~1    # etc
 
-												
+###############################################################
+# restore changes
+###############################################################												
 # reverting changes, these three commands have entirely different purposes.
 # - git revert
 #	This command creates a new commit that undoes the changes from a previous commit. This command adds new history to the project (it doesn't modify existing history).
@@ -120,5 +130,50 @@ git revert 0cb12da   							# use revert if the changes has also been made on re
 												# revert will introudce a new commit which reverting the changes
 												# which is also much safer
 												
-												
-												
+
+###############################################################
+# conflict resolution approach
+###############################################################
+# I want to merge back from source_branch into target_branch, but there are merge conflicts prevent from FF
+# Step 1: check out the target branch and merge in the changes from the source branch, manually resolve the conflicts
+git checkout target_branch
+git pull origin source_branch # or get fetch origin source_branch and merge with FETCH_HEAD 
+
+# Step 2: after the merge conflicts are resolved, stage the changes accordingly, commit the changes and push.
+git commit
+git push origin HEAD
+
+###############################################################
+# understanding of repo structure
+###############################################################
+A single git repository can track an arbitrary number of branches, 
+but your working tree is associated with just one of them (the "current" 
+or "checked out" branch), and HEAD points to that branch. HEAD is the commit at the tip of the current branch.
+
+|1.Working tree|     |2.index/staging|        |3.local repo|       |4.remote repo|
+
+# 1->2
+git add 
+# 2->3
+git commit
+# 3->4
+git push
+# 4->3
+git fetch
+# compare 1 and 2
+git diff
+# compare 1 and 3
+git diff HEAD
+git diff FETCH_HEAD 
+
+--> FETCH_HEAD where rev100 and rev99 are fetched via git fetch
+    rev100
+    rev99
+--> HEAD, after git merge (which follows after git fetch), the HEAD will move to where FETCH_HEAD is
+	rev98
+	rev97
+	..
+	..
+ 
+
+	
