@@ -77,6 +77,11 @@ git branch -d <branch_name>           # or -D to force delete
 # merge related
 git merge <branch_name>				# merge the code from <branch_name> into current branch
 
+// restore a delete branch e.g. PR deleted branch
+git reflog to find the tip revision sha
+git checkout <sha>
+git checkout -b <branch_name>
+git push -u origin <branch_name>
 
 ###############################################################
 # tag related
@@ -142,6 +147,30 @@ git pull origin source_branch # or get fetch origin source_branch and merge with
 # Step 2: after the merge conflicts are resolved, stage the changes accordingly, commit the changes and push.
 git commit
 git push origin HEAD
+
+
+###############################################################
+cherry pick commit(s)
+###############################################################
+dd2e86 - 946992	- 9143a9 - a6fd86 - 5a6057 [master]
+           \
+            76cada - 62ecb3	- b886a0 [feature]
+e.g. we want to apply 62ecb3 onto the master only            
+git checkout master
+git cherry-pick 62ecb3
+
+e.g. we want to apply a range of commit from 76cada to 62ecb3
+git cherry-pick init_revision..end_revision   # init_revision is not included, end_revision is included   
+git cherry-pick init_revision^..end_revision  # init_revision is included, end_revision is included
+   
+git checkout master
+git cherry-pick 76cada^..62ecb3
+// In case you have a conflict, solve it and type
+git cherry-pick --continue
+//to continue the cherry-pick process.
+
+
+
 
 ###############################################################
 # understanding of repo structure
