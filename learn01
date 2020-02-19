@@ -39,7 +39,8 @@ git diff <branch1> <branch2> e.g. git diff master feature_x
 git show <branch/tag>			 e.g. git show master, git show 1.0.0.1
 git switch <branch_name>
 git remote show origin				# show all remote information for origin
-git config --list					# shows all inherited values from: system, global and local
+git merge --abort                   # during back merge by git cmd, e.g. git merge <source_branch>, if conflicts occur or you do not want to continue the merge, you could do this to abort the operation
+
 
 ###############################################################
 # branches related
@@ -93,7 +94,7 @@ git tag codebase_at_some_time_point 			# tags can be any name
 git tag -a 1.0.0.2 -m 'release for 1.0.0,2'		# annotated tagging
 git push origin 1.0.0.1 1.0.0.2					# push the tags to remote
 git push --tags									# push all tags to remote
-git checkout -b 1.0.x.x	1.0.0.1					# tag can not be switched/checkout
+git checkout -t -b 1.0.x.x	1.0.0.1				# tag can not be switched/checkout
 												# we can create a branch from an existing tag
 												# e.g. 1.0.x.x patch branch for 1.0.0.1 released version
 git tag <tag_name> <reference of commit>        # create a tag from some past commit
@@ -204,5 +205,22 @@ git diff FETCH_HEAD
 	..
 	..
  
+
+
+###############################################################
+# understanding the git configuration
+###############################################################
+(1. Systen Level) <-- (2. Global Level) <-- (3. Repository Level)
+1. System level (applied to every user on the system and all their repositories)
+2. Global level (values specific personally to you, the user)
+3. Repository level (specific to that single repository)
+
+git config --list					# shows all inherited values from: system, global and local
+git config --list --show-origin     # also see where that setting is defined
+git config --list --system
+git config --list --global
+git config --list --local
+git config --edit                   # edit the configuration, by default --local
+git config user.name				# read one particular configuration, may also specify options --system, --global, --local to read that value at a particular level.
 
 	
