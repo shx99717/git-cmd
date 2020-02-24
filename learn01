@@ -42,6 +42,10 @@ git switch <branch_name>
 git remote show origin				# show all remote information for origin
 git merge --abort                   # during back merge by git cmd, e.g. git merge <source_branch>, if conflicts occur or you do not want to continue the merge, you could do this to abort the operation
 
+// to remove untracked files
+git clean -n           # check what will be removed
+git clean -d           # remove directories
+git clean -f           # real delete
 
 ###############################################################
 # find the difference
@@ -130,7 +134,9 @@ git fetch --all -p                    # or fetch and prune all remote origin
 git branch -d <branch_name>           # or -D to force delete
  
 # merge related
-git merge <branch_name>				# merge the code from <branch_name> into current branch
+git merge <branch_name>							# merge the code from <branch_name> into current branch
+git merge <branch_name> --no-commit --no-ff 	# git merge without auto commit, this give a chance to further tweak the merge result before committing.
+
 
 // restore a delete branch e.g. PR deleted branch
 git reflog to find the tip revision sha
@@ -298,3 +304,4 @@ git config --global difftool.smerge.cmd 'smerge "$BASE" "$LOCAL" "$REMOTE"'
 git config --global diff.tool smerge
 git config --global difftool.prompt false
 4. git difftool is a Git command that allows you to compare and edit files between revisions using common diff tools. git difftool is a frontend to git diff and accepts the same options and arguments.
+
