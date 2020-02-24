@@ -8,6 +8,10 @@ git commit -m "first commit"
 git remote add origin https://github.com/shx99717/dummy.git  
 git push -u origin master  
 
+
+###############################################################
+# .gitignore file format
+###############################################################
 # add ignore file lists
 # cotent of the file
 # - Literal file names, e.g. dummy_file, .some_file  
@@ -21,6 +25,7 @@ git push -u origin master
 #   **/logs/*.log matches all files ending with .log in a logs directory
 # - Comment start with #
 touch .gitignore  
+
 
 ###############################################################
 # commonly used ones
