@@ -165,9 +165,10 @@ git tag codebase_at_some_time_point 			# tags can be any name
 git tag -a 1.0.0.2 -m 'release for 1.0.0,2'		# annotated tagging
 git push origin 1.0.0.1 1.0.0.2					# push the tags to remote
 git push --tags									# push all tags to remote
-git checkout -t -b 1.0.x.x	1.0.0.1				# tag can not be switched/checkout
+git checkout tags/1.0.0.1 -b 1.0.x.x            # tag can not be switched/checkout
 												# we can create a branch from an existing tag
 												# e.g. 1.0.x.x patch branch for 1.0.0.1 released version
+git checkout "tags/'5.3.2.1'" -b 5.3.3.x		# in case of special characters there	
 git tag <tag_name> <reference of commit>        # create a tag from some past commit
 												# e.g. git tag v1.2 5fcdb03
 
