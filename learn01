@@ -309,11 +309,13 @@ git config --global merge.tool smerge
 4. git mergetool # Use git mergetool to run one of several merge utilities to resolve merge conflicts. It is typically run after git merge.
 
 -- setup difftool
-1. install Sublime Merge
+1. install meld
 2. add the executable onto the Path
 3. 
-git config --global difftool.smerge.cmd 'smerge "$BASE" "$LOCAL" "$REMOTE"'
-git config --global diff.tool smerge
+git config --global difftool.meld.cmd 'meld "$LOCAL" "$REMOTE"'
+git config --global diff.tool meld
 git config --global difftool.prompt false
 4. git difftool is a Git command that allows you to compare and edit files between revisions using common diff tools. git difftool is a frontend to git diff and accepts the same options and arguments.
+
+
 
