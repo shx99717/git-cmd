@@ -168,7 +168,7 @@ git push --tags									# push all tags to remote
 git checkout tags/1.0.0.1 -b 1.0.x.x            # tag can not be switched/checkout
 												# we can create a branch from an existing tag
 												# e.g. 1.0.x.x patch branch for 1.0.0.1 released version
-git checkout "tags/'5.3.2.1'" -b 5.3.3.x		# in case of special characters there	
+git checkout "tags/'5.3.2.1'" -b release/2020-02-5.3.x.x		# in case of special characters there	
 git tag <tag_name> <reference of commit>        # create a tag from some past commit
 												# e.g. git tag v1.2 5fcdb03
 
@@ -308,11 +308,12 @@ git config --global mergetool.smerge.trustExitCode true
 git config --global merge.tool smerge
 4. git mergetool # Use git mergetool to run one of several merge utilities to resolve merge conflicts. It is typically run after git merge.
 
+
 -- setup difftool
 1. install meld
 2. add the executable onto the Path
 3. 
-git config --global difftool.meld.cmd 'meld "$LOCAL" "$REMOTE"'
+git config --global difftool.meld.cmd 'meld "$REMOTE" "$LOCAL"'
 git config --global diff.tool meld
 git config --global difftool.prompt false
 4. git difftool is a Git command that allows you to compare and edit files between revisions using common diff tools. git difftool is a frontend to git diff and accepts the same options and arguments.
