@@ -296,6 +296,24 @@ git config --edit                   # edit the configuration, by default --local
 git config user.name				# read one particular configuration, may also specify options --system, --global, --local to read that value at a particular level.
 git config some.param value			# setup one particular configuration, may also specify options --system, --global, --local to set that value at a particular level.
 
+
+###############################################################
+# setup the line ending
+###############################################################
+style 1: Checkout Windows-style, commit Unix-style (recommended)
+Git will convert LF to CRLF when checking out text files. When committing text files, CRLF will be converted to LF. 
+For cross-platform projects, this is the recommended setting on Windows 
+git config --global core.autocrlf true
+
+style 2: Checkout as-is, commit Unix-style
+Git will not perform any conversion when checking out text files. When committing text files, CRLF will be converted to LF. 
+For cross-platform projects this is the recommended setting on Unix 
+git config --global core.autocrlf input
+
+style 3: Checkout as-is, commit as-is
+Git will not perform any conversions when checking out or committing text files. Choosing this option is not recommended for cross-platform projects 
+git config --global core.autocrlf false
+
 ###############################################################
 # setup git difftool and mergetool
 ###############################################################	
@@ -310,13 +328,13 @@ git config --global merge.tool smerge
 
 
 -- setup difftool
-1. install meld
+1. install WinMerge
 2. add the executable onto the Path
 3. 
-git config --global difftool.meld.cmd 'meld "$REMOTE" "$LOCAL"'
-git config --global diff.tool meld
+git config --global difftool.winmerge.name WinMerge
+git config --global difftool.winmerge.trustExitCode true
+git config --global difftool.winmerge.cmd 'WinMergeU -u -e "$REMOTE" "$LOCAL"'
+git config --global diff.tool winmerge
 git config --global difftool.prompt false
 4. git difftool is a Git command that allows you to compare and edit files between revisions using common diff tools. git difftool is a frontend to git diff and accepts the same options and arguments.
-
-
 
