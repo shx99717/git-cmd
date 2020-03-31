@@ -328,13 +328,12 @@ git config --global merge.tool smerge
 
 
 -- setup difftool
-1. install WinMerge
-2. add the executable onto the Path
-3. 
-git config --global difftool.winmerge.name WinMerge
-git config --global difftool.winmerge.trustExitCode true
-git config --global difftool.winmerge.cmd 'WinMergeU -u -e "$REMOTE" "$LOCAL"'
-git config --global diff.tool winmerge
+1. install kdiff3
+2. 
+git config --global diff.tool kdiff3
+git config --global difftool.trustExitCode false
 git config --global difftool.prompt false
+git config --global difftool.kdiff3.path "E:/Program Files/KDiff3/kdiff3.exe"
 4. git difftool is a Git command that allows you to compare and edit files between revisions using common diff tools. git difftool is a frontend to git diff and accepts the same options and arguments.
+
 
