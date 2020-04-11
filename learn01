@@ -298,7 +298,6 @@ git config user.name				# read one particular configuration, may also specify op
 git config some.param value			# setup one particular configuration, may also specify options --system, --global, --local to set that value at a particular level.
 
 
-git config --global http.sslVerify false  # trust self-signed url address
 
 
 ###############################################################
@@ -341,3 +340,19 @@ git config --global difftool.kdiff3.path "E:/Program Files/KDiff3/kdiff3.exe"
 4. git difftool is a Git command that allows you to compare and edit files between revisions using common diff tools. git difftool is a frontend to git diff and accepts the same options and arguments.
 
 
+###############################################################
+# Git MISC knowledge
+###############################################################
+
+# trust self-signed url address
+git config --global http.sslVerify false  
+
+# let git credential manager to save your password, you need only to type once
+# The Git Credential Manager for Windows (GCM) is a credential helper for Git. It securely stores your credentials in the Windows Credential Manager so you only need to enter them once for each remote repo you access. All future Git commands will reuse the existing credentials. 
+git config --global credential.helper manager
+
+# if the password is remembered, but afterwards the password changed, git pull will tell Authentication failed
+1. Go to Windows Credential Manager
+2. Once the app is open, click on the Windows Credentials tab.
+3. Locate the credentials that you want to remove/update, they will start with "git:" and might begin with "ada:"
+4. Click Edit or Remove as required and confirm.
