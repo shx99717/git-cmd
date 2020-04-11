@@ -298,6 +298,9 @@ git config user.name				# read one particular configuration, may also specify op
 git config some.param value			# setup one particular configuration, may also specify options --system, --global, --local to set that value at a particular level.
 
 
+git config --global http.sslVerify false  # trust self-signed url address
+
+
 ###############################################################
 # setup the line ending
 ###############################################################
