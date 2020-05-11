@@ -116,7 +116,9 @@ git diff origin/<branch-1> origin/<branch-2> -- <file>
 ###############################################################
 git branch  						# show local branches
 git branch -a						# show all branches, including remote
-git branch <branch_name> 			# create a branch using current code base
+git branch <branch_name> 			# create a branch using current code base, then switch to the newly created
+                                    # branch, add, commit and push to remote, then switch back to the original 
+                                    # branch, all changes are gone
 git switch <branch_name>			# switch a branch
 git push -u origin feature_x		# push the branch onto the remote and track it, -u = --set-upstream
 git branch -u <remote-repo>/<branch_name>   # later let a local branch to track a remote branch
