@@ -361,3 +361,5 @@ git config --global credential.helper manager
 
 # the command line to fetch and pull multiple repositories under a parent folder
 find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} fetch --all -p \; -exec git -C {} pull \; -exec echo '-----------------------------------------------------' \;
+# put into an alias, e.g. ~/.bashrc, then check with alias command, $> alias
+alias git-sync-all="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} fetch --all -p \; -exec git -C {} pull \; -exec echo '-----------------------------------------------------' \;"
