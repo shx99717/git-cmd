@@ -358,3 +358,6 @@ git config --global credential.helper manager
 2. Once the app is open, click on the Windows Credentials tab.
 3. Locate the credentials that you want to remove/update, they will start with "git:" and might begin with "ada:"
 4. Click Edit or Remove as required and confirm.
+
+# the command line to fetch and pull multiple repositories under a parent folder
+find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} fetch --all -p \; -exec git -C {} pull \; -exec echo '-----------------------------------------------------' \;
