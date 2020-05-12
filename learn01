@@ -363,3 +363,6 @@ git config --global credential.helper manager
 find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} fetch --all -p \; -exec git -C {} pull \; -exec echo '-----------------------------------------------------' \;
 # put into an alias, e.g. ~/.bashrc, then check with alias command, $> alias
 alias git-sync-all="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} fetch --all -p \; -exec git -C {} pull \; -exec echo '-----------------------------------------------------' \;"
+
+# fetch and pull in one command
+alias git-fetch-pull="git fetch --all -p; git pull"
