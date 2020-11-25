@@ -182,11 +182,19 @@ git tag <tag_name> <reference of commit>        # create a tag from some past co
 ###############################################################
 git stash list									# shows all of the existing stashes
 git stash										# add a stash with auto generated message
-git stash save "here is the description"		# add a stash with customized comment
+git stash push -m 'here is the description'		# add a stash with customized comment
 git stash pop									# to apply the most recent stash on current working directory and drop the stash in one go
 git stash pop stash@{1}							# to apply a specific stash, and drop
 git stash apply									# to apply the most recent stash on current working directory, but NO drop
 git stash apply stash@{1}						# to apply a specific stash, but NO drop
+git stash drop									# drop the most recent stash
+git stash drop stash@{1}						# drop a specific stash
+git stash show									# show the most recent stash changelist
+git stash show -p								# show the most recent stash in diff mode
+git stash show stash@{2}						# show a specific stash changelist
+git stash show -p stash@{2}						# show a specific stash in diff mode
+git stash show -p master						# show the most recent stash in diff mode compare to master
+
 
 // WIP = Working In Progress
 // the git stash is also a very good tools to do copy and paste a bunch of changes from one branch to other branch
