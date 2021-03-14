@@ -393,3 +393,11 @@ alias git-sync-all="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {
 
 # fetch and pull in one command
 alias git-fetch-pull="git fetch --all -p; git pull"
+
+# in case we have GFW issue that blocks us from connecting to github.com, issues could be:
+  - fatal: unable to access 'https://github.com/xxx': OpenSSL SSL_read: SSL_ERROR_SYSCALL, errno 10054
+  - OpenSSL SSL_read: Connection was reset, errno 10054
+# we could use a proxy to access the github via, the below line will enable the proxy globally for git, and use socks5 protocol
+git config --global http.proxy 'socks5://desets01.medavis.local:1080'
+# it can be turned off by
+git config --global --unset http.proxy
