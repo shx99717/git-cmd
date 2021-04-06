@@ -157,6 +157,20 @@ git checkout <sha>
 git checkout -b <branch_name>
 git push -u origin <branch_name>
 
+// see the last commit on each branch, can come with -r -a option
+git branch -v
+
+// see which branches are already merged into the current branch, can come with -r -a option
+git branch --merged 
+
+// see which branches are Not yet merged into the current branch, can come with -r -a option
+git branch --no-merged
+
+// provide an additional argument to ask about the merge state with respect to some other branch
+// without checking that other branch first, e.g. what is Not merged into the master branch
+git branch --no-merged master
+
+
 ###############################################################
 # tag related
 ###############################################################
