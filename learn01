@@ -399,6 +399,7 @@ git config --global difftool.kdiff3.path "E:/Program Files/KDiff3/kdiff3.exe"
 git config --global user.name Raymond Shen
 git config --global user.email raymond.shen@medavis.com
 
+
 # trust self-signed url address
 git config --global http.sslVerify false  
 
