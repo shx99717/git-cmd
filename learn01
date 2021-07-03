@@ -407,7 +407,7 @@ git config --global --unset http.sslVerify
 
 # or, trust self-signed ssl certificate
 1. Download the pem certificate by using Firefox, *.pem, no need to download the whole chain
-2. by inspecting the value from git config --system --list, we know the system level truststore which contains all trusted certificates are located at
+2. by inspecting the value from 'git config --system --list', we know the system level truststore which contains all trusted certificates are located at
    http.sslcainfo=d:/Program Files/Git/mingw64/ssl/certs/ca-bundle.crt
 3. edit the ca-bundle.crt file, append to the end of the file with the content of the *.pem
 
