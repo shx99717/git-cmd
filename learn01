@@ -400,9 +400,19 @@ git config --global user.name Raymond Shen
 git config --global user.email raymond.shen@medavis.com
 
 
-# trust self-signed url address
-git config --global http.sslVerify false  
+# ignore the check of ssl certificate, this is not recommended
+git config --global http.sslVerify false
+# unset the option  
+git config --global --unset http.sslVerify
 
+# or, trust self-signed ssl certificate
+1. Download the pem certificate by using Firefox, *.pem, no need to download the whole chain
+2. by inspecting the value from git config --system --list, we know the system level truststore which contains all trusted certificates are located at
+   http.sslcainfo=d:/Program Files/Git/mingw64/ssl/certs/ca-bundle.crt
+3. edit the ca-bundle.crt file, append to the end of the file with the content of the *.pem
+
+
+   
 # let git credential manager to save your password, you need only to type once
 # The Git Credential Manager for Windows (GCM) is a credential helper for Git. It securely stores your credentials in the Windows Credential Manager so you only need to enter them once for each remote repo you access. All future Git commands will reuse the existing credentials. 
 git config --global credential.helper manager
@@ -425,6 +435,7 @@ alias git-fetch-pull="git fetch --all -p; git pull"
   - fatal: unable to access 'https://github.com/xxx': OpenSSL SSL_read: SSL_ERROR_SYSCALL, errno 10054
   - OpenSSL SSL_read: Connection was reset, errno 10054
 # we could use a proxy to access the github via, the below line will enable the proxy globally for git, and use socks5 protocol
-git config --global http.proxy 'socks5://seqa010-vm-de:1080'
+git config --global http.proxy 'http://seqa010-vm-de:808'
+git config --global https.proxy 'https://seqa010-vm-de:808'
 # it can be turned off by
 git config --global --unset http.proxy
