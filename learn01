@@ -465,8 +465,8 @@ git remote -v
 # read more here: https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token
 # for git version >= 2.31.1
 ###############################################################	
-cnnblenovo-088 general access: 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
-DESKTOP001 general access: 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
+cnnblenovo-088 general access: ghp(this_is_an_underscore)poGIvqaGj6lMMHoFl5OoryCX2IVLy03HV8F3
+DESKTOP001 general access: ghp(this_is_an_underscore)fBtR711AG2w5WwBURkQ8uwV27Av96g227pIZ
 # Input the token when the Credential Manager prompt appears
 
 
