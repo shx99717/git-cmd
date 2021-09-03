@@ -482,6 +482,12 @@ git config --global http.sslVerify false
 # unset the option  
 git config --global --unset http.sslVerify
 
+# or, configure Git to use the medavis certificates, https://wiki.medavis.local/display/MPE/GIT+on+Windows
+# in MPM, install the medavis certificate to Windows Certificate Storage
+> Add-CertificateRootCA -System
+# let Git use the Windows Certificate Storage
+> git config --global http.sslBackend schannel
+
 # or, trust self-signed ssl certificate
 1. Download the pem certificate by using Firefox, *.pem, no need to download the whole chain
    e.g. https://git.medavis.local/, its pem certificate is stored in my own repo, the file name is git-medavis-local.pem
