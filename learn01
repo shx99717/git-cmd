@@ -473,7 +473,7 @@ DESKTOP001 general access: ghp(this_is_an_underscore)fBtR711AG2w5WwBURkQ8uwV27Av
 ###############################################################
 # Git MISC knowledge
 ###############################################################
-git config --global user.name Raymond Shen
+git config --global user.name "Raymond Shen"
 git config --global user.email raymond.shen@medavis.com
 
 
