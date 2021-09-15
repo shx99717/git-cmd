@@ -523,3 +523,4 @@ git config --global http.proxy 'http://seqa010-vm-de:808'
 git config --global https.proxy 'https://seqa010-vm-de:808'
 # it can be turned off by
 git config --global --unset http.proxy
+git config --global --unset https.proxy
