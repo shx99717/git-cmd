@@ -245,6 +245,8 @@ master~1    # etc
 git checkout <file_name>						# discard the changes of the file in the working area
 git checkout .									# discard all the changes of the files in the working area
 git restore <file_name>							# (better) to discard changes in working area
+git restore .                                   # discard all changes of the file in the working area
+git clean -d -f									# remove untracked files from the working tree (-d including directories)(-n Don’t actually remove anything, just show what would be done.)
 git restore --staged <file_name>				# to unstage the file
 git reset HEAD~3								# to remove recent 3 commits, also the history is modified
 git revert 0cb12da   							# use revert if the changes has also been made on remote, otherwise the
