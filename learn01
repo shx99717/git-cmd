@@ -478,11 +478,6 @@ DESKTOP001 general access: ghp(this_is_an_underscore)fBtR711AG2w5WwBURkQ8uwV27Av
 git config --global user.name "Raymond Shen"
 git config --global user.email raymond.shen@medavis.com
 
-# we are all working on windows, therefore there is no need for cross-platform development, 
-# we can turn it off, otherwise during the checkout and commit, we will see problem like
-# warning: LF will be replaced by CRLF in b4m.next-patient-portal/src/main/webapp/js/booking4med.bundled.min.js
-git config --global core.autocrlf false
-
 
 # ignore the check of ssl certificate, this is not recommended
 git config --global http.sslVerify false
