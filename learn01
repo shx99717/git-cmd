@@ -485,7 +485,7 @@ git config --global http.sslVerify false
 git config --global --unset http.sslVerify
 
 # or, configure Git to use the medavis certificates, https://wiki.medavis.local/display/MPE/GIT+on+Windows
-# in MPM, install the medavis certificate to Windows Certificate Storage
+# in MPM, install the medavis certificate to Windows Certificate Storage & Java cacerts
 > Add-CertificateRootCA -System
 # let Git use the Windows Certificate Storage
 > git config --global http.sslBackend schannel
