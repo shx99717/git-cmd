@@ -52,6 +52,11 @@ git clean -n           # check what will be removed
 git clean -d           # remove directories
 git clean -f           # real delete
 
+
+// Git delete local branches which are not on remote
+git fetch -p && for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do git branch -D $branch; done
+
+
 ###############################################################
 # find the difference
 ###############################################################
