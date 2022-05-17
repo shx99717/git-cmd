@@ -161,6 +161,14 @@ git reflog to find the tip revision sha
 git checkout <sha>
 git checkout -b <branch_name>
 git push -u origin <branch_name>
+//
+// or
+//
+// If you're looking to branch out from a specific commit of a branch, first be sure you are in the branch
+git switch dev
+// Now I want to checkout a specific commit 123654 from the dev branch to a new branch while keeping the head on main branch.
+git checkout -b new-branch 123654
+
 
 // see the last commit on each branch, can come with -r -a option
 git branch -v
