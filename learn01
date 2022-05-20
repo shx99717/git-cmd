@@ -230,11 +230,23 @@ git stash show -p master						# show the most recent stash in diff mode compare 
 // develop a patch for release branch, and later apply the change also on the master, then we could use git stash to achieve it easily
 
 ###############################################################												
-# MISC syntax
+# MISC
 ###############################################################
 HEAD~3      # suffix ~<n> to a revision parameter means the commit object that is the nth generation ancestor of the
             # named commit object.												
 master~1    # etc
+
+// Create patch between two branches
+git diff old_branch new_branch > e:/temp/result.patch
+// Switch to the branch that you want to apply patch
+git switch target_branch
+// Apply the patch
+// --reject option will instruct git to not fail if it cannot determine how to apply a patch, but instead to apply the individual hunks it can apply and create reject files (.rej) for hunks it cannot apply.
+// --whitespace=fix will warn about whitespace errors and try to fix them, rather than refusing to apply an otherwise applicable hunk.
+// Both options together make the application of a patch more robust against failure, but they require additional attention with respect to the result.
+git apply --reject --whitespace=fix e:/temp/result.patch
+
+
 
 ###############################################################
 # restore changes
