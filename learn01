@@ -421,7 +421,7 @@ git config --global difftool.kdiff3.path "E:/Program Files/KDiff3/kdiff3.exe"
 
 
 ###############################################################
-# setup to connect Github with SSH
+# setup to connect Github with SSH <-- this is optional, we could stick with https, using ssh to connect to github is not mandatory
 # read more here: https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh
 ###############################################################	
 1. Generating a new SSH key(in the Git Bash)
