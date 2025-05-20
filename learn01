@@ -200,9 +200,10 @@ git checkout tags/1.0.0.1 -b 1.0.x.x            # tag can not be switched/checko
 												# e.g. 1.0.x.x patch branch for 1.0.0.1 released version
 git checkout "tags/'5.3.2.1'" -b release/2020-02-5.3.x.x		# in case of special characters there
 git push -u origin release/2020-02-5.3.x.x		# push the branch onto the remote and track it, -u = --set-upstream
-git tag <tag_name> <reference of commit>        # create a tag from some past commit
-												# e.g. git tag v1.2 5fcdb03
-
+git tag -a <tag_name> <reference of commit> -m "tag message"       # create a tag from some past commit
+												                   # e.g. git tag -a v1.2 5fcdb03 -m "manual tagging"
+												                   # e.g. git tag -a v1.3 head -m "manual tagging"
+git push origin v1.3
 
 ###############################################################
 # stash related
