@@ -499,6 +499,50 @@ DESKTOP001 general access: ghp(this_is_an_underscore)fBtR711AG2w5WwBURkQ8uwV27Av
 
 
 ###############################################################
+What does git diff master..HEAD mean?
+What does the other way around git diff HEAD..master mean?
+if I am on a branch called feature/this-is-a-dummy?
+###############################################################
+HEAD – This refers to the current commit on your current branch feature/this-is-a-dummy
+// git diff master..HEAD
+This shows all the changes that exist on my current branch (feature/this-is-a-dummy) that are not in master.
+In other words: “What would happen if I applied my branch on top of master?”
+Think of it as an arrow pointing from back to front to merge result
+
+
+// git diff HEAD..master
+It shows changes from master that are not in HEAD
+In other words: “If I applied master on top of my branch, what would change?”
+Think of it as an arrow pointing from back to front to merge result
+
+
+###############################################################
+What is the difference between
+git diff master..HEAD
+git diff master...HEAD
+###############################################################
+Two dots (..) let master as the base for comparison
+  | master..HEAD shows all differences including commits made in master
+Three dots (...) let the merge base for comparison, the merge base is "the most recent common ancestor"
+  | master...HEAD shows only what your branch added relative to where it diverged
+
+Take an example:
+master:  A --- B --- C
+                   \
+feature:            D --- E --- F
+
+It is clear that B is the merge base,
+master branch has commits: A → B → C.
+feature branch started from B and has commits: D → E → F.
+we ask: “Where did master and feature last share history?”
+A → shared by both branches? Yes.
+B → shared by both branches? Yes.
+C → only on master, not in feature.
+git diff master...feature uses B as the starting point
+It shows the changes in feature since the branch diverged from master, ignoring commits added to master C
+
+
+###############################################################
 # Git MISC knowledge
 ###############################################################
 git config --global user.name "Raymond Shen"
