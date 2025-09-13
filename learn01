@@ -565,6 +565,32 @@ This will give me 2.2, as the master has already re-integrated with the feature/
 
 
 ###############################################################
+Learn how to read the git commit graph
+###############################################################
+Sample project
+https://github.com/shx99717/learn-graph
+
+master --> 1 --> 2 --> 3 --> 4-------------------------------> m1--------> m2 ---------------> m3
+                 |     |     |                                  |          |                    |
+                 feature/new-feature-a --> 2.1 --> 2.2 --> merge back m1   |                    |
+                       |     |                                             |                    |
+                       feature/new-feature-b --> 3.1 ---------- merge back m2 --> 3.2 --> merge back m3
+                             |
+                             feature/new-feature-c --> 4.1
+
+Say I am currently on master, take the git commit graph on VS code as an example, here are the hints to read the graph
+  | the solid dot in a normal commit
+  | the hollow dot is the HEAD of current branch, e.g. since I am on master, so the hollow dot is at the HEAD of the master
+  | the circle with dot inside is a merge commit
+  | Pull request #1 is the m1 merge commit from feature/new-feature-a
+  | Pull request #2 is the m2 merge commit from feature/new-feature-b, but after m2, the feature/new-feature-b is kept for developing 3.2 commit
+  | Pull request #3 is the m3 merge commit from feature/new-feature-b, there is no further development on this branch
+  | As I am on the master branch, the change of feature/new-feature-c has not yet re-integrated to master yet, so on the commit graph of master branch, 4.1 is not there
+
+
+
+
+###############################################################
 Git jargon explanation
 ###############################################################
 Normal commit
