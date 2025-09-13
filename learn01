@@ -543,6 +543,28 @@ It shows the changes in feature since the branch diverged from master, ignoring 
 
 
 ###############################################################
+Find the commit where the current branch branched off from
+###############################################################
+Example:
+master --> 1 --> 2 --> 3
+                 |
+                 feature/new-feature-a --> 2.1 --> 2.2
+I am at branch feature/new-feature-a,
+> git merge-base HEAD master | xargs git log -1 --oneline
+This gives you the common ancestor commit of the two branches — effectively the commit where your branch diverged, it will give me 2 as the common-ancestor
+
+If after 2.2, with a PR, the code merged back to master
+master --> 1 --> 2 --> 3 ---------------------------M
+                 |                                  |
+                 feature/new-feature-a --> 2.1 --> 2.2
+M is a merge commit
+then at feature/new-feature-a,
+> git merge-base HEAD master | xargs git log -1 --oneline
+This will give me 2.2, as the master has already re-integrated with the feature/new-feature-a branch with a M merge commit, so the common ancestor become 2.2 since the merge
+
+
+
+###############################################################
 Git jargon explanation
 ###############################################################
 Normal commit
