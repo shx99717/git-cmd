@@ -543,6 +543,101 @@ It shows the changes in feature since the branch diverged from master, ignoring 
 
 
 ###############################################################
+Git jargon explanation
+###############################################################
+Normal commit
+  | A <- B <- C
+  | C’s parent is B.
+    B’s parent is A.
+  | Each commit stores the whole state of your repo plus a pointer to its parent commit
+  | the commit meta of B will look like
+
+    tree <hash>
+    parent <hash-of-A>
+    author ...
+    committer ...
+
+------
+
+Merge commit
+  | A merge commit is created when you merge one branch into another (e.g., git merge feature-branch while on main).
+  | Git automatically creates this commit when you do a merge unless you’re using a “fast-forward” merge
+  | A---B---C------M (main)
+        \        /
+         D---E---
+    M is a merge commit
+    M's meta will store both parents information, C and E
+
+    tree <hash>
+    parent <hash-of-C>
+    parent <hash-of-E>
+    author ...
+    committer ...
+
+    the merge commit keeps pointers to all the commits it was merged from
+
+------
+
+Back-merge	            main → feature	  Periodically during feature work to keep up to date
+Reintegration or merge	feature → main	  When the feature is finished and merged back
+
+
+------
+
+Fast-forward
+A---B---C (main)
+             \
+              D---E (feature)
+since branching, main hasn’t moved at all — it’s still at C, and feature just kept adding D and E.
+So the history is really:
+main: A-B-C
+feature: A-B-C-D-E
+
+when issue "git merge feature"
+Git will judge:
+  1. Is my current branch tip (C) an ancestor of the branch I’m merging (E)?
+  2. If yes, it doesn’t create a new merge commit.
+  3. It simply moves the branch pointer of main forward to E
+
+become
+A---B---C---D---E (main)
+No merge commit appears, no extra node in the graph is needed. Your history is just a straight line.
+Default git merge will fast-forward if possible.
+If you want a merge commit even when a fast-forward is possible, you can force it
+git merge feature --no-ff
+
+
+------
+
+
+Integration branch
+
+In Git, an integration branch is not a special kind of branch; it’s just a convention for a branch whose purpose is to aggregate and test changes from multiple other branches before they’re promoted to a mainline branch.
+In many workflows (e.g. Git Flow, release branches), teams don’t merge feature branches directly into main/master.
+Instead, they merge them into an integration branch (sometimes called develop, integration, next, staging, etc.).
+That branch is used to:
+  | Integrate (combine) all current feature work.
+  | Run CI/CD pipelines, automated tests, or manual QA.
+  | Spot conflicts or incompatibilities early.
+Once it’s stable, it’s merged or released into main.
+
+e.g.
+main (production releases)
+ \
+  develop (integration branch)
+    \
+     feature/* (feature branches)
+Developers branch off from develop to create feature/*.
+They finish a feature and merge it back into develop (integration).
+Continuous integration runs on develop.
+When a release is ready, develop is merged into main and tagged.
+Here, develop = integration branch.
+This way, it keeps main stable and deployable at all times.
+
+
+
+
+###############################################################
 # Git MISC knowledge
 ###############################################################
 git config --global user.name "Raymond Shen"
