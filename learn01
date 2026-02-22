@@ -230,6 +230,110 @@ git stash show -p master						# show the most recent stash in diff mode compare 
 // then the changes just like copy and paste from Branch-A to Branch-B, this workflow could be used in scenario like
 // develop a patch for release branch, and later apply the change also on the master, then we could use git stash to achieve it easily
 
+
+###############################################################
+# worktree related
+###############################################################
+// A worktree lets you check out multiple branches at the same time in separate directories,
+// all sharing the same .git repository. No need to stash, switch, or clone again.
+// Think of it as: instead of switching branches, you open another folder with a different branch.
+
+git worktree list								# show all worktrees (including the main one)
+
+// create a worktree with a NEW branch (most common for daily work)
+// e.g. you are working on feature-A, but need to start a hotfix urgently
+// instead of: stash -> switch -> create branch -> work -> switch back -> stash pop
+// you simply:
+git worktree add -b hotfix/fix-123 ../hotfix-dir master
+//                  ^new branch     ^directory    ^base branch
+// now ../hotfix-dir has master's code on a new branch hotfix/fix-123, your current work is untouched
+// open ../hotfix-dir in your IDE and work on both things in parallel
+
+// create a worktree from an existing branch (useful for PR review or checking someone's work)
+git worktree add ../review-pr origin/feature-xyz
+//               ^directory   ^existing branch
+// now ../review-pr has the code from feature-xyz, you can read/build/test it side by side
+
+// when done, remove the worktree
+git worktree remove ../hotfix-dir				# remove the worktree directory and unregister it
+git worktree remove ../review-pr
+
+// if you manually deleted the worktree folder (e.g. rm -rf ../hotfix-dir), clean up the stale reference
+git worktree prune								# remove stale worktree entries
+
+// why worktree instead of cloning another copy?
+// - git clone creates a completely independent copy: separate .git, separate history, separate remotes
+//   any commit you make in the clone is NOT visible in the original until you push+fetch
+// - git worktree shares the same .git repo: all branches, stashes, commits, and remotes are shared
+//   a commit in one worktree is instantly visible in all other worktrees (they share the same refs)
+// - worktree uses less disk space: only one copy of the .git history, not duplicated per clone
+// - no need to push/pull between copies: everything is already in sync because it's the same repo
+// - summary: clone = two separate repos, worktree = one repo with multiple working directories
+
+// what does "side by side" mean in practice?
+// - you can open two IDE windows, each pointing to a different worktree directory
+//   e.g. IDE window 1: d:/git/my-project/         (your current feature work on feature-A)
+//        IDE window 2: d:/git/my-project-review/   (colleague's PR branch for review)
+// - you can compare code, copy patterns, or reference implementations across branches
+//   without constantly switching branches and losing your place
+// - you can build and run both branches at the same time (e.g. test the hotfix while feature-A compiles)
+
+// typical daily workflows:
+//
+// Workflow 1: urgent hotfix while working on a feature
+//   you are on feature-A, half-way through, uncommitted changes everywhere
+//   a production bug comes in, needs a hotfix on master NOW
+//   git worktree add -b hotfix/bug-456 ../my-project-hotfix master
+//   cd ../my-project-hotfix
+//   ... fix the bug, commit, push, create PR ...
+//   cd ../my-project                                 # back to your feature work, everything intact
+//   git worktree remove ../my-project-hotfix          # clean up when done
+//
+// Workflow 2: reviewing a colleague's PR
+//   you want to actually build and test a PR, not just read the diff online
+//   git fetch
+//   git worktree add ../my-project-review origin/feature-xyz
+//   ... open ../my-project-review in IDE, build, run tests, review ...
+//   git worktree remove ../my-project-review          # clean up when done
+//
+// Workflow 3: comparing your branch with master side by side
+//   you are on feature-A and want to see how master currently looks
+//   git worktree add ../my-project-master master
+//   ... open both directories in separate IDE windows, compare side by side ...
+//   git worktree remove ../my-project-master          # clean up when done
+//
+// Workflow 4: syncing worktree work back to master
+//   you finished the hotfix in the worktree, committed and pushed, now want master to include it
+//
+//   Option A - if the branch was merged via PR on remote (e.g. GitHub):
+//     cd ../my-project                                # go to main worktree (on master)
+//     git fetch && git pull                           # pull the merge commit from remote
+//
+//   Option B - merge locally without a PR:
+//     cd ../my-project                                # go to main worktree (on master)
+//     git merge hotfix/fix-123                        # instant, commits are already local (shared .git)
+//
+//   key insight: worktrees share the same .git, so commits from one worktree are already
+//   present in all others. You only need to merge or pull to move the branch pointer.
+
+// practical tips:
+// - each worktree is a real directory on disk, with its own working tree and index
+// - they all share the same .git repo, so branches, stashes, commits are all shared
+// - you CANNOT have the same branch checked out in two worktrees at the same time
+// - a common convention is to put worktrees next to (sibling of) the main repo folder:
+//     d:/git/my-project/          <-- main worktree (e.g. on master)
+//     d:/git/my-project-hotfix/   <-- worktree for hotfix branch
+//     d:/git/my-project-review/   <-- worktree for PR review
+// - when the worktree is removed, the branch is still there, you can switch to it normally
+//   removing a worktree only deletes the directory and unregisters it from `git worktree list`
+//   the branch itself (e.g. hotfix/fix-123) is NOT deleted, it still lives in your repo
+//   think of worktree as a temporary window to a branch, closing the window doesn't delete the branch
+//   so you can still `git switch hotfix/fix-123` in your main worktree to continue working on it
+//   if you also want to delete the branch afterwards:
+//     git worktree remove ../my-project-hotfix
+//     git branch -d hotfix/fix-123                # delete the branch explicitly
+
+
 ###############################################################												
 # MISC
 ###############################################################
